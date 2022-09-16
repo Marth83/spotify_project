@@ -64,15 +64,12 @@ app.get('/callback', (req, res) => {
           `Sucessfully retreived access token. Expires in ${expires_in} s.`
         );
 
-        spotifyApi.getMe()
-        .then(function(data) {
-            console.log('Some information about the authenticated user', data.body);
-        }, function(err) {
-            console.log('Something went wrong!', err);
-        });
+        const queryParams = new URLSearchParams({
+            access_token,
+            refresh_token
+        })
 
-
-        res.send('Success! You can now close the window.');
+        res.redirect(`http://localhost:3000/?${queryParams.toString()}`);
   
         setInterval(async () => {
           const data = await spotifyApi.refreshAccessToken();
