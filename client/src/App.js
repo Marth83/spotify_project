@@ -1,20 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import { accessToken } from './spotify'
+import { useState, useEffect } from 'react';
 
 function App() {
+  
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    setToken(accessToken);
+    console.log(token)
+  }, []);
+  
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="http://localhost:8888/login"
-        >
-          Log into Spotify
-        </a>
+        { !token ? (
+          <a
+            className="App-link"
+            href="http://localhost:8888/login"
+          >
+            Log into Spotify
+          </a>
+        ):(
+          <h1>Logged in!</h1>
+        )}
       </header>
     </div>
   );
