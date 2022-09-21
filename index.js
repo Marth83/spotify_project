@@ -96,15 +96,6 @@ app.get('/callback', (req, res) => {
         })
 
         res.redirect(`http://localhost:3000/?${queryParams.toString()}`);
-  
-        setInterval(async () => {
-          const data = await spotifyApi.refreshAccessToken();
-          const access_token = data.body['access_token'];
-  
-          console.log('The access token has been refreshed!');
-          console.log('access_token:', access_token);
-          spotifyApi.setAccessToken(access_token);
-        }, expires_in / 2 * 1000);
       })
       .catch(error => {
         console.error('Error getting Tokens:', error);
