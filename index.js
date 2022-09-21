@@ -51,8 +51,7 @@ app.get('/callback', (req, res) => {
       .then(data => {
         const access_token = data.body['access_token'];
         const refresh_token = data.body['refresh_token'];
-        //const expires_in = data.body['expires_in'];
-        const expires_in = 30;
+        const expires_in = data.body['expires_in'];
 
         spotifyApi.setAccessToken(access_token);
         spotifyApi.setRefreshToken(refresh_token);
@@ -66,7 +65,8 @@ app.get('/callback', (req, res) => {
 
         const queryParams = new URLSearchParams({
             access_token,
-            refresh_token
+            refresh_token,
+            expires_in,
         })
 
         res.redirect(`http://localhost:3000/?${queryParams.toString()}`);
