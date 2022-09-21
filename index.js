@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const app = express();
 var SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
@@ -34,7 +35,32 @@ app.get('/', (req, res)=>{
 app.get('/login', (req, res) => {
     res.redirect(spotifyApi.createAuthorizeURL(scopes));
   });
-  
+
+app.get('/refresh_token', (req, res) => {
+  const { refresh_token } = req.query;
+
+  const queryParams = new URLSearchParams({
+    grant_type : 'refresh_token',
+    refresh_token: refresh_token
+  })
+
+  axios({
+    method: 'post',
+    url: 'https://accounts.spotify.com/api/token',
+    data: queryParams.toString(),
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${new Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`,
+    },
+  })
+    .then(response => {
+      res.send(response.data);
+    })
+    .catch(error => {
+      res.send(error);
+    });
+});
+
 app.get('/callback', (req, res) => {
     const error = req.query.error;
     const code = req.query.code;

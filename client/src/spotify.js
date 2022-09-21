@@ -47,7 +47,7 @@ const refreshToken = async () => {
 
     // Use `/refresh_token` endpoint from our Node app
     const { data } = await axios.get(`/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`);
-
+    console.log(data)
     // Update localStorage values
     window.localStorage.setItem(LOCALSTORAGE_KEYS.accessToken, data.access_token);
     window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
