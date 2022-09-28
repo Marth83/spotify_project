@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { accessToken, logout } from './spotify'
 import { useState, useEffect } from 'react';
+var SpotifyWebApi = require('spotify-web-api-js');
+var spotifyApi = new SpotifyWebApi();
 
 function App() {
   
@@ -9,7 +11,7 @@ function App() {
 
   useEffect(() => {
     setToken(accessToken);
-    console.log(token)
+    spotifyApi.setAccessToken(accessToken);
   }, []);
   
   return (
