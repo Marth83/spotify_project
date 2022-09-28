@@ -1,6 +1,7 @@
 {
   "name": "spotify_project",
   "version": "1.0.0",
+  "proxy": "http://localhost:3000",
   "description": "https://tecadmin.net/install-nvm-macos-with-homebrew/",
   "main": "index.js",
   "scripts": {
