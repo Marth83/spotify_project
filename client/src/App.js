@@ -1,9 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import { accessToken, logout } from './spotify'
+import { accessToken, logout, getCurrentUserProfile } from './spotify'
 import { useState, useEffect } from 'react';
-var SpotifyWebApi = require('spotify-web-api-js');
-var spotifyApi = new SpotifyWebApi();
 
 function App() {
   
@@ -11,7 +9,11 @@ function App() {
 
   useEffect(() => {
     setToken(accessToken);
-    spotifyApi.setAccessToken(accessToken);
+    const fetchUserData = async () => {
+      const { data } = await getCurrentUserProfile();
+      console.log(data);
+    }
+    fetchUserData()
   }, []);
   
   return (
