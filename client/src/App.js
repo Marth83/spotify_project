@@ -47,9 +47,9 @@ function App() {
           <BrowserRouter>
             <ScrollToTop>
               <Routes>
-                <Route path='playlist' element={<Playlists />} />
-                <Route path='playlist/:id' element={<Playlist />} />
-                <Route path='topArtist' element={<TopArtists />} />
+                <Route path='playlists' element={<Playlists />} />
+                <Route path='playlists/:id' element={<Playlist />} />
+                <Route path='topArtists' element={<TopArtists />} />
                 <Route path='topTracks' element={<TopTracks />} />
                 <Route path='history' element={<History />} />
                 <Route path='/' element={<Profile />}
