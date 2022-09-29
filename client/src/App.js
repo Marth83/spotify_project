@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { useState, useEffect } from 'react';
@@ -7,15 +6,6 @@ import { Playlist, Playlists, TopArtists, TopTracks, History, Login } from './pa
 import ScrollToTop from './scrollToTop';
 import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
-
-const StyledLoginButton = styled.a`
-  background-color: var(--green);
-  color: var(--white);
-  padding: 10px 20px;
-  margin: 20px;
-  border-radius: 30px;
-  display: inline-block;
-`;
 
 function App() {
   
