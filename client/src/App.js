@@ -3,9 +3,7 @@ import './App.css';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
-import Playlist from './pages/Playlist';
-import Playlists from './pages/Playlists';
-import TopArtists from './pages/TopArtists';
+import { Playlist, Playlists, TopArtists, TopTracks, History, Login } from './pages';
 import ScrollToTop from './scrollToTop';
 import { GlobalStyle } from './styles';
 import styled from 'styled-components/macro';
@@ -37,12 +35,7 @@ function App() {
       <GlobalStyle />
       <header className="App-header">
         { !token ? (
-          <>
-            <img src={logo} className="App-logo" alt="logo" />
-            <StyledLoginButton href="http://localhost:8888/login">
-            Log in to Spotify
-            </StyledLoginButton>
-          </>
+          <Login />
         ):(
           <BrowserRouter>
             <ScrollToTop>
@@ -50,6 +43,8 @@ function App() {
                 <Route path='playlist' element={<Playlists />} />
                 <Route path='playlist/:id' element={<Playlist />} />
                 <Route path='topArtist' element={<TopArtists />} />
+                <Route path='topTracks' element={<TopTracks />} />
+                <Route path='history' element={<History />} />
                 <Route path='/' element={
                   <>
                     <h1>Logged in!</h1>

@@ -1,4 +1,4 @@
-const TopTrack = () => {
+const TopTracks = () => {
     return(<h2>Top tracks</h2>);
 }
-export default TopTrack;
+export default TopTracks;
