@@ -1,10 +1,26 @@
-import './App.css';
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
-import { Playlist, Playlists, TopArtists, TopTracks, History, Login } from './pages';
+import { Playlist, Playlists, TopArtists, TopTracks, History, Login, Profile } from './pages';
 import ScrollToTop from './scrollToTop';
 import { GlobalStyle } from './styles';
+import styled from 'styled-components/macro';
+
+const StyledLogoutButton = styled.button`
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(0,0,0,.7);
+  color: var(--white);
+  font-size: var(--fz-sm);
+  font-weight: 700;
+  border-radius: var(--border-radius-pill);
+  z-index: 10;
+  @media (min-width: 768px) {
+    right: var(--spacing-lg);
+  }
+`;
 
 function App() {
   
@@ -26,6 +42,8 @@ function App() {
         { !token ? (
           <Login />
         ):(
+          <>
+          <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
           <BrowserRouter>
             <ScrollToTop>
               <Routes>
@@ -34,12 +52,7 @@ function App() {
                 <Route path='topArtist' element={<TopArtists />} />
                 <Route path='topTracks' element={<TopTracks />} />
                 <Route path='history' element={<History />} />
-                <Route path='/' element={
-                  <>
-                    <h1>Logged in!</h1>
-                    <button onClick={logout}>Log out</button>
-                  </>
-                  }
+                <Route path='/' element={<Profile />}
                 />
                 <Route path='*' element={
                   <>
@@ -51,6 +64,7 @@ function App() {
               </Routes>
             </ScrollToTop>
           </BrowserRouter>
+          </>
         )}
       </header>
     </div>

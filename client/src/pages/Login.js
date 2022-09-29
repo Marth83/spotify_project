@@ -27,7 +27,6 @@ const StyledLoginButton = styled.a`
 
 const Login = () => (
   <StyledLoginContainer>
-  <img src={logo} className="App-logo" alt="logo" />
     <StyledLoginButton href="http://localhost:8888/login">
       Log in to Spotify
     </StyledLoginButton>
@@ -35,3 +34,5 @@ const Login = () => (
 );
 
 export default Login;
+
+//  <img src={logo} className="App-logo" alt="logo" />
