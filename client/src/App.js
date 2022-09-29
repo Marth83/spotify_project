@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import { Playlist, Playlists, TopArtists, TopTracks, History, Login } from './pages';
 import ScrollToTop from './scrollToTop';
 import { GlobalStyle } from './styles';
-import styled from 'styled-components/macro';
 
 function App() {
   
