@@ -1,2 +1,4 @@
 .DS_Store
 node_modules
+client/src/App.js
+.vscode

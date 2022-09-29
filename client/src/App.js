@@ -2,9 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import { accessToken, logout, getCurrentUserProfile } from './spotify'
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Playlist from './pages/Playlist'
+import Playlists from './pages/Playlists'
 import TopArtists from './pages/TopArtists'
+import ScrollToTop from './scrollToTop'
 
 function App() {
   
@@ -36,7 +38,8 @@ function App() {
           <BrowserRouter>
             <ScrollToTop>
               <Routes>
-                <Route path='playlist' element={<Playlist />} />
+                <Route path='playlist' element={<Playlists />} />
+                <Route path='playlist/:id' element={<Playlist />} />
                 <Route path='topArtist' element={<TopArtists />} />
                 <Route path='/' element={
                   <>
@@ -46,7 +49,10 @@ function App() {
                   }
                 />
                 <Route path='*' element={
-                  <h1>Oups! You're lost!</h1>
+                  <>
+                    <h1>Oups! You're lost!</h1>
+                    <Link to="/" className="btn">Back home</Link>
+                  </>
                 }
               />
               </Routes>
