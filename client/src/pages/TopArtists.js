@@ -1,37 +1,35 @@
 import { useState, useEffect } from 'react';
+import { getTopArtists } from '../spotify';
 import { catchErrors } from '../utils';
-import {
-  getTopArtists,
-} from '../spotify';
-import {
-  SectionWrapper,
-  ArtistsGrid
-} from '../components';
+import { ArtistsGrid, SectionWrapper, TimeRangeButtons } from '../components';
 
 const TopArtists = () => {
+  const [topArtists, setTopArtists] = useState(null);
+  const [activeRange, setActiveRange] = useState('short');
 
-    const [topArtists, setTopArtists] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await getTopArtists(`${activeRange}_term`);
+      setTopArtists(data);
+    };
 
-    useEffect(() => {
-        const fetchData = async () => {
-          const userTopArtists = await getTopArtists();
-          setTopArtists(userTopArtists.data);
-        };
-    
-        catchErrors(fetchData());
-      }, []);
+    catchErrors(fetchData());
+  }, [activeRange]);
 
+  return (
+    <main>
+      <SectionWrapper title="Top Artists" breadcrumb={true}>
+        <TimeRangeButtons
+          activeRange={activeRange}
+          setActiveRange={setActiveRange}
+        />
 
-    return(         
-        <>
-            {topArtists && (
-            <main>
-              <SectionWrapper title="Top artists this month" seeAllLink="/topArtists">
-                <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
-              </SectionWrapper>
-            </main>
-          )}
-        </>
-    );
-}
+        {topArtists && topArtists.items && (
+          <ArtistsGrid artists={topArtists.items} />
+        )}
+      </SectionWrapper>
+    </main>
+  );
+};
+
 export default TopArtists;
