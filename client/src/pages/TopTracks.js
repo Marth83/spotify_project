@@ -15,7 +15,7 @@ const TopTracks = () => {
 
     catchErrors(fetchData());
   }, [activeRange]);
-
+  
   return (
     <main>
       <SectionWrapper title="Top Tracks" breadcrumb={true}>

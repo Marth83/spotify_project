@@ -4,13 +4,15 @@ import {
   getCurrentUserProfile,
   getCurrentUserPlaylists,
   getTopArtists,
-  getTopTracks
+  getTopTracks,
+  getRecentlyPlayed
 } from '../spotify';
 import {
   SectionWrapper,
   ArtistsGrid,
   TrackList,
-  PlaylistsGrid
+  PlaylistsGrid,
+  RecentlyPlayedList
 } from '../components';
 import { StyledHeader } from '../styles';
 
@@ -19,6 +21,7 @@ const Profile = () => {
   const [playlists, setPlaylists] = useState(null);
   const [topArtists, setTopArtists] = useState(null);
   const [topTracks, setTopTracks] = useState(null);
+  const [recentlyPlayed, setRecentlyPlayed] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +36,9 @@ const Profile = () => {
 
       const userTopTracks = await getTopTracks();
       setTopTracks(userTopTracks.data);
+
+      const userHistory = await getRecentlyPlayed();
+      setRecentlyPlayed(userHistory.data);
     };
 
     catchErrors(fetchData());
@@ -62,7 +68,7 @@ const Profile = () => {
             </div>
           </StyledHeader>
 
-          {topArtists && topTracks && playlists && (
+          {topArtists && topTracks && playlists && recentlyPlayed && (
             <main>
               <SectionWrapper title="Top artists this month" seeAllLink="/topArtists">
                 <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
@@ -75,6 +81,11 @@ const Profile = () => {
               <SectionWrapper title="Playlists" seeAllLink="/playlists">
                 <PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
               </SectionWrapper>
+
+              <SectionWrapper title="Recently viewed" seeAllLink="/history">
+                <RecentlyPlayedList tracks={recentlyPlayed.items.slice(0, 10)} />
+              </SectionWrapper>
+
             </main>
           )}
         </>

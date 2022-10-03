@@ -4,7 +4,7 @@ const app = express();
 var SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
 
-const scopes = ['user-read-private', 'user-read-email', 'user-top-read'];
+const scopes = ['user-read-private', 'user-read-email', 'user-top-read', 'user-read-recently-played'];
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.PRIVATE_ID;

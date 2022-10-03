@@ -30,7 +30,6 @@ function App() {
     setToken(accessToken);
     const fetchUserData = async () => {
       const { data } = await getCurrentUserProfile();
-      console.log(data);
     }
     fetchUserData()
   }, []);
@@ -43,27 +42,27 @@ function App() {
           <Login />
         ):(
           <>
-          <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
-          <BrowserRouter>
-            <ScrollToTop>
-              <Routes>
-                <Route path='playlists' element={<Playlists />} />
-                <Route path='playlists/:id' element={<Playlist />} />
-                <Route path='topArtists' element={<TopArtists />} />
-                <Route path='topTracks' element={<TopTracks />} />
-                <Route path='history' element={<History />} />
-                <Route path='/' element={<Profile />}
+            <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+            <BrowserRouter>
+              <ScrollToTop>
+                <Routes>
+                  <Route path='playlists' element={<Playlists />} />
+                  <Route path='playlists/:id' element={<Playlist />} />
+                  <Route path='topArtists' element={<TopArtists />} />
+                  <Route path='topTracks' element={<TopTracks />} />
+                  <Route path='history' element={<History />} />
+                  <Route path='/' element={<Profile />}
+                  />
+                  <Route path='*' element={
+                    <>
+                      <h1>Oups! You're lost!</h1>
+                      <Link to="/" className="btn">Back home</Link>
+                    </>
+                  }
                 />
-                <Route path='*' element={
-                  <>
-                    <h1>Oups! You're lost!</h1>
-                    <Link to="/" className="btn">Back home</Link>
-                  </>
-                }
-              />
-              </Routes>
-            </ScrollToTop>
-          </BrowserRouter>
+                </Routes>
+              </ScrollToTop>
+            </BrowserRouter>
           </>
         )}
       </header>
